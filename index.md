@@ -36,6 +36,42 @@ Now, let's start filling it in. We know that we have a total population of 10,00
 | Negative    |   C   |     D    |  C + D |
 |             | A + C |   B + D  | 10,000 |
 
+In cell A + C we're going to put the number of sick people. We know this number because the prevalence is 5%, and 5% of 10,000 is 500.
+
+| Test Result | Sick | Not Sick |        |
+|-------------|------|----------|--------|
+| Positive    |   A  |     B    |  A + B |
+| Negative    |   C  |     D    |  C + D |
+|             |  500 |   B + D  | 10,000 |
+
+From there, cell A and cell C can be quickly filled in. Cell A is 90% of 500 because the sensitivity is 90%, so cell A is 450. Cell C is the difference, 50.
+
+| Test Result | Sick | Not Sick |        |
+|-------------|------|----------|--------|
+| Positive    |  450 |     B    |  A + B |
+| Negative    |  50  |     D    |  C + D |
+|             |  500 |   B + D  | 10,000 |
+
+We also know that B + D is 9,500, and that D is 80% of 9,500.
+
+| Test Result | Sick | Not Sick |        |
+|-------------|------|----------|--------|
+| Positive    |  450 |     B    |  A + B |
+| Negative    |  50  |   7,600  |  C + D |
+|             |  500 |   9,500  | 10,000 |
+
+A little more math and we get the rest of the table values.
+
+| Test Result | Sick | Not Sick |        |
+|-------------|------|----------|--------|
+| Positive    |  450 |   1,900  |  2,350 |
+| Negative    |  50  |   7,600  |  7,650 |
+|             |  500 |   9,500  | 10,000 |
+
+So now we answer two questions. With 5% prevalence, what is the probability that someone who tests positive is a true positive? Using the table above, we see that the answer is 450/2,350, which is about 19%. This is also known as the **positive predictive value**. And what is the probability that a negative test is a true negative? The answere there is 7,600/7,650, or about 99%. This is also known as the **negative predictive value**. So you see that the chance that a positive is really a positive is about 1 in 5, whereas the chance of a negative being trully negative is almost certain.
+
+What about 15% prevalence? The final table looks like this:
+
 
 
 # Creating a Shiny Dashboard

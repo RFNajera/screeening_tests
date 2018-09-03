@@ -81,9 +81,20 @@ What about 15% prevalence? The final table looks like this:
 From this table, we see that the positive predictive value is about 39% while the negative predictive value is about 98%. An increased prevalence from 5% to 15% almost doubled the positive predictive value while lowering the negative predictive value just a pinch. Can you guess what happens when prevalence hits 50%
 
 # Creating a Shiny Dashboard
-You could try to do all this by hand, or you could set up an Excel sheet to do it. In fact, I set up an Excel sheet with some formulas to learn about all this. But what if you could set up a [Shiny](https://shiny.rstudio.com/) dashboard  
+You could try to do all this by hand, or you could set up an Excel sheet to do it. In fact, I set up an Excel sheet with some formulas to learn about all this. But what if you could set up a [Shiny](https://shiny.rstudio.com/) dashboard that could graphically show you how positive and negative predictive value change with prevalence, and how this also influences the number of true/false positives and true/false negatives.
 
-# Adding Inputs
-Coming soon...
+The app is very simple. There is no data processing going on in the background. It uses your input to calculate the values that go in the table above, and then it uses those values to calculate the positive and negiative predictive values. The app also shows you graphically what your screened population will look like in terms of true/false positives and true/false negatives.
+
+# Writing the Code
+The basic structure of a Shiny application is simple:
+````r
+library(shiny)
+ui <- fluidPage()
+server <- function(input, output) {}
+shinyApp(ui = ui, server = server)
+````
+That's it. You install the shiny library, you create a user interface (ui) and a server function (server), and then you tell the app to run and declare which script is the user interface and which script is the server. You can find [more detailed instructions online](https://deanattali.com/blog/building-shiny-apps-tutorial/), of course. I recommend trail and error to learn how each line of code works (or doesn't). It's very much how we humans learn best, and you won't break a thing is you do it in the comfort and safety of your own R console.
+
+So let me show you 
 
 # Making it work

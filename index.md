@@ -95,6 +95,69 @@ shinyApp(ui = ui, server = server)
 ````
 That's it. You install the shiny library, you create a user interface (ui) and a server function (server), and then you tell the app to run and declare which script is the user interface and which script is the server. You can find [more detailed instructions online](https://deanattali.com/blog/building-shiny-apps-tutorial/), of course. I recommend trail and error to learn how each line of code works (or doesn't). It's very much how we humans learn best, and you won't break a thing is you do it in the comfort and safety of your own R console.
 
-So let me show you 
+So let me show you how I constructed the app. First, the user interface. Make sure to read the comments in the code:
+
+````r
+# Load the libraries we'll need
+library(shiny)
+library(shinydashboard)
+library(leaflet)
+library(ggthemes)
+library(scales)
+
+ui <- dashboardPage(
+  dashboardHeader(title = "Screening Tests"),
+  dashboardSidebar(
+    sliderInput("population",
+                label = h4("Total Population"),
+                min = 0, 
+                max = 100000,
+                value = 10000
+                ), # Input the population number we want to use, with 10,000 as the default
+    sliderInput("prevalence",
+                label = h4("Prevalence"),
+                min = 0, 
+                max = 100,
+                value = 50,
+                round = 0,
+                post = "%"
+                ), # Input the prevalence we want to use, with 50% as the default
+    sliderInput("sensitivity",
+                label = h4("Test Sensitivity"),
+                min = 0, 
+                max = 100,
+                value = 99,
+                post = "%"
+                ), # Input the sensitivity we want to use, with 99% as the default
+    sliderInput("specificity",
+                label = h4("Test Specificity"),
+                min = 0, 
+                max = 100,
+                value = 99,
+                post = "%"
+                ) # Input the specificity we want to use, with 99% as the default
+  ),
+  dashboardBody(
+    fluidRow(
+      column(4,
+             box(
+               plotOutput("plot1"),
+               width = 100)
+             ), # One column with the first plot
+      column(4,
+             box(
+               plotOutput("plot2"),
+               width = 100)
+            ), # Another column with the second plot
+      column(4,
+             box(
+               tableOutput("values"),
+               width = 100
+             ))
+            ) # A third column with a table with the results of the calculations
+    )
+  )
+````
+
 
 # Making it work

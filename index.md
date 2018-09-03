@@ -72,10 +72,18 @@ So now we answer two questions. With 5% prevalence, what is the probability that
 
 What about 15% prevalence? The final table looks like this:
 
+| Test Result | Sick  | Not Sick |        |
+|-------------|-------|----------|--------|
+| Positive    | 1,350 |   1,700  |  3,050 |
+| Negative    |  150  |   6,800  |  6,950 |
+|             | 1,500 |   8,500  | 10,000 |
 
+From this table, we see that the positive predictive value is about 39% while the negative predictive value is about 98%. An increased prevalence from 5% to 15% almost doubled the positive predictive value while lowering the negative predictive value just a pinch. Can you guess what happens when prevalence hits 50%
 
 # Creating a Shiny Dashboard
-Coming soon...
+You could try to do all this by hand, or you could set up an Excel sheet to do it. In fact, I set up an Excel sheet with some formulas to learn about all this. But what if you could set up a [Shiny](https://shiny.rstudio.com/) dashboard  
 
 # Adding Inputs
 Coming soon...
+
+# Making it work

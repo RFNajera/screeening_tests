@@ -15,10 +15,20 @@ In this exercise, we will learn to create a Shiny Dashboard in R that uses only 
 {:toc}
 
 # The Math of It All
-Coming soon...
+The relationship between the prevalence of a disease/condition and the reliability of a screening test is mathematical. You see it when you set up a 2-by-2 table to look at your results. For the following example, we'll assume that we have a population of 10,000 people and a screening test that is 90% **sensitive** and 80% **specific**. We'll look at two situations, one where the **prevalence** of the disease is 5% and another where the prevalence is 15%.
 
-# The 2x2 Table
-Coming soon...
+First, some definitions:
+*Sensitivity* is the probability that someone who is trully sick will test positive (a **true positive**). *Specificity* is the probability that someone who is not sick will test negative (a **true negative**). Prevalence is the existing number of cases of a disease divided by the total population.
+
+So let's set up our 2-by-2 table:
+
+| Test Result | Sick  | Not Sick |       |
+|-------------|-------|----------|-------|
+| Positive    |   A   |     B    | A + B |
+| Negative    |   C   |     D    | C + D |
+|             | A + C |   B + D  | Total |
+
+
 
 # Creating a Shiny Dashboard
 Coming soon...

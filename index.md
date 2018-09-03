@@ -28,6 +28,14 @@ So let's set up our 2-by-2 table:
 | Negative    |   C   |     D    | C + D |
 |             | A + C |   B + D  | Total |
 
+Now, let's start filling it in. We know that we have a total population of 10,000. So we'll put that in the "Total" cell.
+
+| Test Result | Sick  | Not Sick |        |
+|-------------|-------|----------|--------|
+| Positive    |   A   |     B    |  A + B |
+| Negative    |   C   |     D    |  C + D |
+|             | A + C |   B + D  | 10,000 |
+
 
 
 # Creating a Shiny Dashboard

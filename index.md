@@ -158,6 +158,18 @@ ui <- dashboardPage(
     )
   )
 ````
-
+So that's the front end. That's what the user will see. And you can see where some of the output of the calculations we're going to make in the server will be shown.
 
 # Making it work
+For the server logic, I'm going to go step by step. First, let's create a dataframe that we'll use for one of the plots. We do this in a reactive expression. It's reactive because it will react to the input from the user on the user interface. You can see some values with "input$" in them, meaning they come from the inputs mentioned above. For example, `input$prevalence` comes from the slider where you would pick the size of the population being tested. Here's the code:
+````r
+ plot_data <- reactive(
+      data.frame(
+        prevalence = input$prevalence,
+        ppv = (((input$population*(input$prevalence/100))*(input$sensitivity/100))/(((input$population*(input$prevalence/100))*(input$sensitivity/100))+((input$population -(input$population*(input$prevalence/100)))-((input$population-(input$population*(input$prevalence/100)))*(input$specificity/100))))*100),
+        npv = (((input$population-(input$population*(input$prevalence/100)))*(input$specificity/100))/(((input$population - (input$population*(input$prevalence/100)))*(input$specificity/100))+((input$population*(input$prevalence/100))-((input$population*(input$prevalence/100))*(input$sensitivity/100))))*100)
+      )
+    ) # End reactive for point plot data
+````
+It looks complicated because of the mathematical calculations that go into the positive predictive value and negative predictive value calculations. Embedded in those calculations are the calculations for true/false positives and true/false negatives. For example, true positives are the product of sensitivity multiplied by number sick, and the number sick is the product of the population number multiplied by the prevalence.
+

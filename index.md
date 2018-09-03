@@ -171,5 +171,38 @@ For the server logic, I'm going to go step by step. First, let's create a datafr
       )
     ) # End reactive for point plot data
 ````
-It looks complicated because of the mathematical calculations that go into the positive predictive value and negative predictive value calculations. Embedded in those calculations are the calculations for true/false positives and true/false negatives. For example, true positives are the product of sensitivity multiplied by number sick, and the number sick is the product of the population number multiplied by the prevalence.
+It looks complicated because of the mathematical calculations that go into the positive predictive value and negative predictive value calculations. Embedded in those calculations are the calculations for true/false positives and true/false negatives. For example, true positives are the product of sensitivity multiplied by number sick, and the number sick is the product of the population number multiplied by the prevalence. Get it?
+
+Next, an observeEvent function that looks at the inputs and creates the first plot accordingly. Again, look at the comments in the code:
+````r
+observeEvent(
+      {
+      input$sensitivity # Looks for changes in the sensitivity slider
+      input$specificity # Looks for changes in the specificity slider
+      input$prevalence # Looks for changes in the prevalence slider
+      },
+    (output$plot1 <- renderPlot
+     ({
+      ggplot(
+        data = plot_data(),
+        aes(prevalence, ppv)
+             ) +
+         geom_point(aes(x = prevalence, y = ppv), # Plots PPV as a blue dot
+                   color = "blue",
+                   size = 4) +
+         geom_point(aes(x = prevalence, y = npv), # Plots NPV as a red dot
+                    color = "red",
+                    size = 4) +
+         labs(title = "Prevalence vs. Positive Predictive Value\nand Negative Predictive Value",
+             subtitle = "Note that PPV (blue) and NPV (red) go up and down based on prevalence",
+             x = "Prevalence",
+             y = "Positive Predictive Value"
+        ) +
+        xlim(0,100) + 
+        ylim(0,100) + 
+        theme_bw() # You can use an assortment of themes using ggthemes: https://ggplot2.tidyverse.org/reference/ggtheme.html
+    })
+    )
+    ) # End of ObserveEvent plot1
+````
 

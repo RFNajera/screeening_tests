@@ -342,6 +342,15 @@ So there you have it. You get a Shiny App that shows you graphically see how dif
 # See It for Yourself
 I've uploaded the app to Shinyapps.io. [Go ahead and play with it].(https://rfnajera.shinyapps.io/screening_tests/)
 
+# A Quick Example
+On page 29 of [this package insert for a rapid influenza screening test](https://www.cliawaived.com/web/items/pdf/Alere%20i%20Influenza%20A%20B%20Test%20Product%20In~4586file2.pdf), the sensitivity and specificity of the test using a nasal swab are listed as 97.9% and 86.2% respectively. [According to CDC](https://www.cdc.gov/flu/about/disease/burden.htm), between 9.2 million and 35.6 million people in the United States get the flu. Let's use the lower number, resulting in a prevalence of 2.8%. With that prevalence, and the performance of that test, the probability of a positive being a true positive is about 18%. The probability of a negative being a true negative is almost certain at 99.9%.
+
+A healthcare provider then has to ask themselves which they want to see, [a true positive or a true negative](https://epidemiological.net/2018/08/28/which-is-better-a-false-positive-a-false-negative-a-true-positive-or-a-true-negative/)? The provider may say something like, "You tested positive, so you might have the flu." Or, "You tested negative, so you don't have the flu." But that's a whole other discussion for a later time.
+
+Now, let's look at the higher number, 35.6 million. That's a prevalence of 10.9%. With that prevalence, the positive predictive value gets better, rising to 46.4%, while the negative predictive value stays fairly high at 99.7%. To have a better than 50/50 shot of a positive being a real positive, you have to have a prevalence of about 13%. As I explained above, healthcare providers push the prevalence of the population being tested by asking about signs, symptoms, exposures, and [taking into account what is happening in the community](https://www.cdc.gov/flu/weekly/fluactivitysurv.htm).
+
+In essence, you don't use screening tests willy-nilly. (And that's why even the ones used at home need to be followed up, positive or negative, with a visit to a healthcare provider, in my opinion.)
+
 # Conclusion
 
 The coding for this was done over the last five days or so, not more than an hour each day. I sketched out the idea first, then made [an Excel spreadsheet](https://www.dropbox.com/s/u95u4kgy2ddmzn1/Screening.xlsx?dl=0) quickly to see what the app should look like. Please feel free to download the code and play with it in your own R console, or go play with the online app. If you have any questions/comments, drop me a line on [Twitter](http://twitter.com/epiren) or [Facebook](http://facebook.com/rene.f.najera).

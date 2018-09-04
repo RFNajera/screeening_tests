@@ -205,4 +205,143 @@ observeEvent(
     )
     ) # End of ObserveEvent plot1
 ````
+Now, let's make a bar plot that shows you how many true and false positives and how many true and false negatives you have based on the population you are testing and, as before, your inputs for prevalence, sensitivity and specificity. First, the data:
+````r
+graph_data <- reactive(
+      data.frame(
+        "resultado" = as.factor(
+          c("True Positive", "False Negative", "False Positive", "True Negative") # Names the bars
+        ),
+        "valor" = as.numeric(
+          c(
+            ((input$population*(input$prevalence/100))*
+               (input$sensitivity/100)), # Calculates the true positive number
+            ((input$population*(input$prevalence/100))-
+               ((input$population*(input$prevalence/100))*(input$sensitivity/100))), # Calculates the false negative number
+            ( (input$population - (input$population*(input$prevalence/100)))-
+                ((input$population - (input$population*(input$prevalence/100)))*(input$specificity/100))), # Calculates false positive number
+            ((input$population - (input$population*(input$prevalence/100)))*
+               (input$specificity/100)) # Calculates true negative number
+          )
+        )
+      )
+    ) # End reactive for bar plot data
+````
+Now, let's create the bar plot:
+````r
+observeEvent(
+      {
+        input$population
+        input$sensitivity
+        input$specificity
+        input$prevalence
+      },
+      (output$plot2 <- renderPlot({
+        ggplot(graph_data(),
+               aes(x = resultado,
+                   y = valor,
+                   fill = factor(resultado))
+               ) +
+          geom_col(
+                   color = "black"
+                   ) +
+          scale_fill_manual( values=c("red","red","blue","blue")) +
+          scale_y_continuous(labels = comma) +
+          labs(title="Number of People by Positive/Negative Result",
+               subtitle = "Data Updates With Inputs",
+               x = "Type of Result",
+               y = "Number of Results"
+          ) +
+          theme_bw() +
+          theme(legend.position="none") +
+          theme(axis.text.x  = element_text(angle=90, vjust=0.5, size=16))
+         })
+       )
+      )# End of ObserveEvent plot2
+````
+Again, just a very simple bar plot with nothing fancy on it.
 
+Finally, I created an HTML table where the results of the calculations would be posted. This one is a little long because of all the calculations that go into it:
+````r
+ # Reactive expression to create data frame of all input values ----
+    sliderValues <- reactive({
+      data.frame(
+        Result = c(
+          "True Cases",
+          "True Non-Cases",
+          "True Positives",
+          "True Negatives",
+          "False Positives",
+          "False Negatives",
+          "Positive Predictive Value",
+          "Negative Predictive Value"
+        ),
+        Value = as.character(c(
+          paste(
+            round(
+              input$population*
+                (input$prevalence/100), digits = 0)
+            ),
+          paste(
+            round(
+              input$population - 
+                (input$population*(input$prevalence/100)),
+              digits = 0
+            )
+          ),
+          paste(
+            round(
+              (input$population*(input$prevalence/100))*
+                (input$sensitivity/100), digits = 0
+            )
+          ),
+          paste(
+            round(
+              (input$population - (input$population*(input$prevalence/100)))*
+                (input$specificity/100), digits = 0
+            )
+          ),
+          paste(
+            round(
+              (input$population - (input$population*(input$prevalence/100)))-
+                ((input$population - (input$population*(input$prevalence/100)))*(input$specificity/100)), digits = 0
+            )
+          ),
+          paste(
+            round(
+              (input$population*(input$prevalence/100))-
+                ((input$population*(input$prevalence/100))*(input$sensitivity/100)), digits = 0
+            )
+          ),
+          paste(round((((input$population*(input$prevalence/100))*
+                          (input$sensitivity/100))/
+                         (((input$population*(input$prevalence/100))*
+                             (input$sensitivity/100))+((input$population - (input$population*(input$prevalence/100)))-
+                                                         ((input$population - (input$population*(input$prevalence/100)))*(input$specificity/100))))*100), digits = 1),"%"),
+          paste(
+            round(
+              (((input$population - (input$population*(input$prevalence/100)))*
+                  (input$specificity/100))/(((input$population - (input$population*(input$prevalence/100)))*
+                                               (input$specificity/100))+((input$population*(input$prevalence/100))-
+                                                                           ((input$population*(input$prevalence/100))*(input$sensitivity/100))))*100)
+              , digits = 1
+            ),
+            "%"
+          )
+        )),
+        stringsAsFactors = FALSE)
+    })
+    
+    # Show the values in an HTML table ----
+    output$values <- renderTable({
+      sliderValues()
+    })
+````
+So there you have it. You get a Shiny App that shows you graphically see how different prevalence values, and different sensitivity and specificity values, affect the chances of a test result being the real deal.
+
+# See It for Yourself
+I've uploaded the app to Shinyapps.io. [Go ahead and play with it].(https://rfnajera.shinyapps.io/screening_tests/)
+
+# Conclusion
+
+The coding for this was done over the last five days or so, not more than an hour each day. I sketched out the idea first, then made [an Excel spreadsheet](https://www.dropbox.com/s/u95u4kgy2ddmzn1/Screening.xlsx?dl=0) quickly to see what the app should look like. Please feel free to download the code and play with it in your own R console, or go play with the online app. If you have any questions/comments, drop me a line on [Twitter](http://twitter.com/epiren) or [Facebook](http://facebook.com/rene.f.najera).

@@ -1,0 +1,12 @@
+name: screening_tests
+title: screening_tests
+username:
+account: rfnajera
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 418119
+bundleId: 1567643
+url: https://rfnajera.shinyapps.io/screening_tests/
+when: 1536007332.40753
+asMultiple: FALSE
+asStatic: FALSE

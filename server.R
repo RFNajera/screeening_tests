@@ -90,7 +90,8 @@ server <- function(input, output) {
                y = "Number of Results"
           ) +
           theme_bw() +
-          theme(legend.position="none")
+          theme(legend.position="none") +
+          theme(axis.text.x  = element_text(angle=90, vjust=0.5, size=16))
          })
        )
       )# End of ObserveEvent plot2
@@ -109,18 +110,42 @@ server <- function(input, output) {
           "Negative Predictive Value"
         ),
         Value = as.character(c(
-          input$population*
-            (input$prevalence/100),
-          input$population - 
-            (input$population*(input$prevalence/100)),
-          (input$population*(input$prevalence/100))*
-            (input$sensitivity/100),
-          (input$population - (input$population*(input$prevalence/100)))*
-            (input$specificity/100),
-          (input$population - (input$population*(input$prevalence/100)))-
-            ((input$population - (input$population*(input$prevalence/100)))*(input$specificity/100)),
-          (input$population*(input$prevalence/100))-
-            ((input$population*(input$prevalence/100))*(input$sensitivity/100)),
+          paste(
+            round(
+              input$population*
+                (input$prevalence/100), digits = 0)
+            ),
+          paste(
+            round(
+              input$population - 
+                (input$population*(input$prevalence/100)),
+              digits = 0
+            )
+          ),
+          paste(
+            round(
+              (input$population*(input$prevalence/100))*
+                (input$sensitivity/100), digits = 0
+            )
+          ),
+          paste(
+            round(
+              (input$population - (input$population*(input$prevalence/100)))*
+                (input$specificity/100), digits = 0
+            )
+          ),
+          paste(
+            round(
+              (input$population - (input$population*(input$prevalence/100)))-
+                ((input$population - (input$population*(input$prevalence/100)))*(input$specificity/100)), digits = 0
+            )
+          ),
+          paste(
+            round(
+              (input$population*(input$prevalence/100))-
+                ((input$population*(input$prevalence/100))*(input$sensitivity/100)), digits = 0
+            )
+          ),
           paste(round((((input$population*(input$prevalence/100))*
                           (input$sensitivity/100))/
                          (((input$population*(input$prevalence/100))*

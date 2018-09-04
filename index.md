@@ -340,7 +340,7 @@ Finally, I created an HTML table where the results of the calculations would be 
 So there you have it. You get a Shiny App that shows you graphically see how different prevalence values, and different sensitivity and specificity values, affect the chances of a test result being the real deal.
 
 # See It for Yourself
-I've uploaded the app to Shinyapps.io. [Go ahead and play with it].(https://rfnajera.shinyapps.io/screening_tests/)
+I've uploaded the app to Shinyapps.io. [Go ahead and play with it](https://rfnajera.shinyapps.io/screening_tests/).
 
 # A Quick Example
 On page 29 of [this package insert for a rapid influenza screening test](https://www.cliawaived.com/web/items/pdf/Alere%20i%20Influenza%20A%20B%20Test%20Product%20In~4586file2.pdf), the sensitivity and specificity of the test using a nasal swab are listed as 97.9% and 86.2% respectively. [According to CDC](https://www.cdc.gov/flu/about/disease/burden.htm), between 9.2 million and 35.6 million people in the United States get the flu. Let's use the lower number, resulting in a prevalence of 2.8%. With that prevalence, and the performance of that test, the probability of a positive being a true positive is about 18%. The probability of a negative being a true negative is almost certain at 99.9%.
